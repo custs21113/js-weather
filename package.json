@@ -1,6 +1,6 @@
 {
   "name": "js-weather",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "a api for china weather which based on koa + puppeteer",
   "main": "src/index.js",
   "scripts": {
