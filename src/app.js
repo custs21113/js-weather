@@ -30,7 +30,6 @@ router.get('/getProvinceUrls', async (ctx) => {
 });
 router.get('/stepCities', async (ctx) => {
     const num = await stepCities();
-    console.log(num);
     ctx.body = {
         msg: 'success',
         num

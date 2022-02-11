@@ -26,14 +26,12 @@ async function getProvinceUrls() {
                 cityName: x.innerText,
                 cityUrl: x.href
             }
-        }))
-        console.log("writing .......", cities);
+        }));
         fs.writeFile(path.resolve(__dirname, './static/cities.json'), JSON.stringify({ cities }, null, 2));
     } catch (error) {
-        console.log(error)
+        console.error(error)
     } finally {
         await broswer.close();
-        console.timeEnd('start');
         return result;
     }
 }
@@ -67,10 +65,9 @@ async function getCityIDByCityUrl(city) {
             };
         }
     } catch (error) {
-        console.log(error)
+        console.error(error)
     } finally {
         await broswer.close();
-        console.timeEnd('start');
         return { province: cityName, cities };
     }
 };
@@ -84,7 +81,6 @@ async function stepCities() {
         await fs.writeFile(path.resolve(__dirname, `./static/${province}.json`), JSON.stringify({ cities }, null, 2));
         num++;
     };
-    console.timeEnd('start');
     return num;
 };
 
@@ -97,12 +93,9 @@ async function stepCitiesChuanXing() { // 串行。
         }));
     }
     for await (let pro of promiseArray) {
-
         let { province, cities } = await pro();
         await fs.writeFile(path.resolve(__dirname, `./static/${province}.json`), JSON.stringify({ cities: cities }, null, 2));
-        console.log(new Date().toLocaleTimeString());
     }
-    console.timeEnd('start');
 };
 
 // 从本地数据中返回省份信息
@@ -124,7 +117,6 @@ async function getWeatherInfoByCityID(id) {
     return data;
 };
 
-console.time('start');
 module.exports = {
     getProvinceUrls,
     getProvinces,
